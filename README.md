@@ -1,21 +1,30 @@
-# Projeto Locadora
+# Car Rental Project
 
-Projeto backend em Django para controle de uma locadora de veículos.
+Django backend project for managing a car rental company.
 
-## Funcionalidades (Parte 1)
-- Cadastro de carros
-- Marcas com valor mínimo de diária
-- Cálculo automático de valor da diária
-- Cálculo automático do seguro (5% da diária, mínimo de 50)
-- Validações de ano, placa, IPVA e revisão
-- Regras de negócio usando validators, clean() e save()
-- Integração com Django Admin
+## Part 1 – Car management
+- Car registration
+- Brand-based minimum daily rate
+- Automatic daily rate calculation
+- Automatic insurance calculation (5% of daily rate, minimum 50)
+- Field validations using custom validators
+- Business rules using clean() and save()
+- Django Admin integration
+## Part 2 – Rental management (Admin)
+- Rental creation and finalization flow
+- Business rules using clean(), save() and domain methods
+- Admin actions to finalize rentals
+- Rental history and filters
 
-## Tecnologias
+## Technologies
 - Python
 - Django
+- Django Admin
 - MySQL
 
-## Observações
-Este repositório representa **a primeira parte do projeto**.
-Próximas etapas incluem o módulo de aluguel e API.
+
+## Next steps
+- Build REST API using Django REST Framework (DRF)
+- Expose endpoints for cars and rentals
+- Implement rental finalization via API
+- Add authentication and permissions
