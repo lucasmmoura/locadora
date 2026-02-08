@@ -36,9 +36,9 @@ class Carro(BaseModel):
     )
 
     alugado = models.BooleanField(
-        verbose_name= 'Alugar?',
-        help_text='Marque se quer alugar',
-        default= 'False'
+        verbose_name= 'Alugado?',
+        help_text='Marque se o carro estiver alugado',
+        default= False
     )
 
     placa = models.CharField(
