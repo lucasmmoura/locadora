@@ -5,6 +5,7 @@ from .base import BaseModel
 from locadora_app.enums import Marca
 from datetime import date
 from locadora_app.validators.validators import *
+from decimal import Decimal
 
 
 
@@ -128,7 +129,7 @@ class Carro(BaseModel):
             self.valor_diaria = 5000
 
 
-        self.seguro = max(self.valor_diaria * 0.05, 50)
+        self.seguro = max(self.valor_diaria * Decimal("0.05"), Decimal("50"))
 
         super().save(*args, **kwargs)
 

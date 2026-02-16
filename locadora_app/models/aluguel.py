@@ -3,12 +3,20 @@ from .base import BaseModel
 from locadora_app.models.carro import Carro
 from datetime import date
 from django.core.validators import *
+from django.contrib.auth.models import User
 
 class Aluguel(BaseModel):
+
+    usuario = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
     carro = models.ForeignKey(
         Carro,
         on_delete = models.CASCADE
     )
+
 
     data_inicio = models.DateField(
         verbose_name= 'Data de início',
