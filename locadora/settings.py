@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from urllib.parse import urlparse
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,30 +78,16 @@ WSGI_APPLICATION = 'locadora.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
-    url = urlparse(os.environ['DATABASE_URL'])
-    DATABASES= {
-        "default":{
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': url.path[1],
-            'USER': url.username,
-            'PASSWORD': url.password,
-            'HOST': url.hostname,
-            'PORT': url.port,
-        }
-    }
 
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'locadora_1',
-            'USER': 'root',
-            'PASSWORD': 'Cahmuns21!',
-            'HOST': 'localhost',
-            'PORT': '3306'
-        }
-    }
+import os
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
+}
+
 
 
 # Password validation
