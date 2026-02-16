@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--=+_bu0$qro&4l*x0l28n%uzwc&32y1sl*4reto39vz*06@6nw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG",'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -75,16 +77,30 @@ WSGI_APPLICATION = 'locadora.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'locadora_1',
-        'USER': 'root',
-        'PASSWORD': 'Cahmuns21!',
-        'HOST': 'localhost',
-        'PORT': '3306'
+if 'DATABASE_URL' in os.environ:
+    url = urlparse(os.environ['DATABASE_URL'])
+    DATABASES= {
+        "default":{
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': url.path[1],
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'locadora_1',
+            'USER': 'root',
+            'PASSWORD': 'Cahmuns21!',
+            'HOST': 'localhost',
+            'PORT': '3306'
+        }
+    }
 
 
 # Password validation
